@@ -2,44 +2,43 @@
 
 namespace ContactManager
 {
-    class Contact
+    public class Contact
     {
-        //public String FirstName { get; set { this.FirstName = FirstName + " "}; }
-        private String firstName;
+        private string firstName;
 
-        public String FirstName
+        public string FirstName
         {
-            get { return firstName; }
-            set { firstName = value + " "; }
+            get { return  firstName; }
+            set {  firstName = value + " "; }
         }
 
-        private String lastName;
+        private string lastName;
 
-        public String LastName
+        public string LastName
         {
             get { return lastName; }
             set { lastName = value + " "; }
         }
 
-        private String phoneNumber;
+        private string phoneNumber;
 
-        public String PhoneNumber
+        public string PhoneNumber
         {
             get { return phoneNumber; }
             set { phoneNumber = value + " "; }
         }
 
-        private String email;
+        private string email;
 
-        public String Email
+        public string Email
         {
             get { return email; }
             set { email = value + " "; }
         }
 
-        private String address;
+        private string address;
 
-        public String Address
+        public string Address
         {
             get { return address; }
             set { address = value + " "; }
@@ -47,7 +46,7 @@ namespace ContactManager
 
         public override string ToString()
         {
-            return FirstName + " " + LastName + " " + Email + " " + PhoneNumber;
+            return $"First Name: {FirstName}\nLast Name: {LastName}\nPhone Number: {PhoneNumber}\nAddress: {Address}\nEmail: {Email}";
         }
     }
 }
