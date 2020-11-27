@@ -5,9 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ContactManager"
         mc:Ignorable="d"
-        Title="Contact Manager" Height="300" Width="400">
+        Title="Contact Manager" Height="350" Width="450"
+        Background="#baf6ff">
 
+    <Window.Resources>
+    <SolidColorBrush x:Key="numbersColor" Color="#444444"/>
+    <SolidColorBrush x:Key="oporatorColor" Color="#ffa500"/>
+    <SolidColorBrush x:Key="optionColor" Color="#d3d3d3"/>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Background" Value=""/>
+        </Style>
+    </Window.Resources>
     <DockPanel Margin="10">
+        <StackPanel DockPanel.Dock="Top">
+            <Label Content="Contact Manager"/>
+        </StackPanel>
         <StackPanel DockPanel.Dock="Right" Margin="10,0" VerticalAlignment="Center">
             <StackPanel.Resources>
                 <Style TargetType="Button">
