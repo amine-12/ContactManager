@@ -44,5 +44,10 @@ namespace ContactManager
             get { return address; }
             set { address = value + " "; }
         }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName + " " + Email + " " + PhoneNumber;
+        }
     }
 }

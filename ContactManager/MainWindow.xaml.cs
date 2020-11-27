@@ -20,10 +20,11 @@ namespace ContactManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Contact> contact = new List<Contact>();
         public MainWindow()
         {
             InitializeComponent();
-            List<Contact> contact = new List<Contact>();
+            
             contact.Add(new Contact() { FirstName = "Bob", LastName = "Leponge ", PhoneNumber = "123 456 789", Email = "asads@gmail.com", Address = "123 Street" });
             contact.Add(new Contact() { FirstName = "Qwer", LastName = "Ty", PhoneNumber = "545 456 789", Email = "adaeds@gmail.com", Address = "12334 Street" });
             contact.Add(new Contact() { FirstName = "Tpop", LastName = "Hjkg", PhoneNumber = "123 516 789", Email = "gdsa@gmail.com", Address = "14223 Street" });
@@ -39,7 +40,15 @@ namespace ContactManager
 
         private void deleteContact_Click(object sender, RoutedEventArgs e)
         {
+           contact.RemoveAt(contactList.SelectedIndex);
+            foreach (var removedItem in contactList.SelectedItems)
+                (contactList.ItemsSource as List<Contact>).Remove((Contact)removedItem);
+            contactList.Items.Refresh();
 
+            //--DEBUG--
+            Console.WriteLine(contactList.SelectedIndex);
+            foreach(var x in contact)
+                Console.WriteLine(x.ToString());
         }
 
         private void displayContact_Click(object sender, RoutedEventArgs e)
@@ -53,6 +62,11 @@ namespace ContactManager
                                 "\nEmail: " + (o as Contact).Email);
 
             }
+        }
+
+        private void addContact_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
