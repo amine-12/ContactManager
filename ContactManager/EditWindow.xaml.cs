@@ -22,12 +22,11 @@ namespace ContactManager
         public EditWindow(int index)
         {
             InitializeComponent();
-            MainWindow main = new MainWindow();
-            firstNameEdit.Text = main.GetList()[index].FirstName;
-            lastNameEdit.Text = main.GetList()[index].LastName;
-            phoneEdit.Text = main.GetList()[index].PhoneNumber;
-            addressEdit.Text = main.GetList()[index].Address;
-            emailEdit.Text = main.GetList()[index].Email;
+            firstNameEdit.Text = MainWindow.contact[index].FirstName;
+            lastNameEdit.Text = MainWindow.contact[index].LastName;
+            phoneEdit.Text = MainWindow.contact[index].PhoneNumber;
+            addressEdit.Text = MainWindow.contact[index].Address;
+            emailEdit.Text = MainWindow.contact[index].Email;
 
         }
     }

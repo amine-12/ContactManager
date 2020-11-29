@@ -22,12 +22,11 @@ namespace ContactManager
         public DisplayContact(int index)
         {
             InitializeComponent();
-            MainWindow main = new MainWindow();
-            firstName.Content = main.GetList()[index].FirstName;
-            lastName.Content = main.GetList()[index].LastName;
-            phone.Content = main.GetList()[index].PhoneNumber;
-            address.Content = main.GetList()[index].Address;
-            email.Content = main.GetList()[index].Email;
+            firstName.Text = MainWindow.contact[index].FirstName;
+            lastName.Text = MainWindow.contact[index].LastName;
+            phone.Text = MainWindow.contact[index].PhoneNumber;
+            address.Text = MainWindow.contact[index].Address;
+            email.Text = MainWindow.contact[index].Email;
         }
     }
 }

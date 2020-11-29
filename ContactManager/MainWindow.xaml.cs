@@ -20,7 +20,7 @@ namespace ContactManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Contact> contact = new List<Contact>();
+        public static List<Contact> contact = new List<Contact>();
         public MainWindow()
         {
             InitializeComponent();
@@ -29,46 +29,47 @@ namespace ContactManager
             contact.Add(new Contact() { FirstName = "Tpop", LastName = "Hjkg", PhoneNumber = "123 516 789", Email = "gdsa@gmail.com", Address = "14223 Street" });
             contact.Add(new Contact() { FirstName = "Lojk", LastName = "Poip", PhoneNumber = "123 456 945", Email = "ertf@gmail.com", Address = "1473 Street" });
             contactList.ItemsSource = contact;
-            
         }
         
-        public List<Contact> GetList()
-        {
-            return contact;
-        }
 
         private void editContact_Click(object sender, RoutedEventArgs e)
         {
-            int index = contactList.SelectedIndex;
-            EditWindow editWindow = new EditWindow(index);
-            editWindow.Show();
+            if (contactList.SelectedIndex >= 0)
+            {
+                EditWindow editWindow = new EditWindow(contactList.SelectedIndex);
+                editWindow.Show();
+            }
             
         }
         
         
         private void deleteContact_Click(object sender, RoutedEventArgs e)
         {
-           contact.RemoveAt(contactList.SelectedIndex);
-            foreach (var removedItem in contactList.SelectedItems)
-                (contactList.ItemsSource as List<Contact>).Remove((Contact)removedItem);
-            contactList.Items.Refresh();
+            
+            if (contactList.SelectedIndex >= 0)
+            {
+                contact.RemoveAt(contactList.SelectedIndex);
+                foreach (var removedItem in contactList.SelectedItems)
+                {
+                    (contactList.ItemsSource as List<Contact>).Remove((Contact)removedItem);
+                }
+            }
 
-            //--DEBUG--
-            Console.WriteLine(contactList.SelectedIndex);
-            foreach(var x in contact)
-                Console.WriteLine(x.ToString());
+            contactList.Items.Refresh();
+          
+            //foreach (var x in contact)
+            //{
+            //    Console.WriteLine(x.ToString());
+            //    Console.WriteLine("----------------------");
+            //}
         }
 
         private void displayContact_Click(object sender, RoutedEventArgs e)
         {
-            int index = contactList.SelectedIndex;
-            //foreach (object o in contactList.SelectedItems)
-            //{
-            //    MessageBox.Show(o.ToString());  //MessageBox ?
-
-            //}
-            DisplayContact displayContact = new DisplayContact(index);
-            displayContact.Show();
+            if(contactList.SelectedIndex >= 0) { 
+                DisplayContact displayContact = new DisplayContact(contactList.SelectedIndex);
+                displayContact.Show();
+            }
         }
 
         private void addContact_Click(object sender, RoutedEventArgs e)
@@ -76,5 +77,6 @@ namespace ContactManager
             AddContact addWindow = new AddContact();
             addWindow.Show();
         }
+
     }
 }
