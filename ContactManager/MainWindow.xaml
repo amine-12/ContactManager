@@ -38,13 +38,13 @@
             <Label Content="Contact Manager"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Right" Margin="10,0" VerticalAlignment="Center">
-
-            <Button x:Name="addContact" Click="addContact_Click" Content="Add Contact" Style="{StaticResource AddButton}"/>
             <Button x:Name="displayContact" Click="displayContact_Click" Content="Display Contact" Height="44" Style="{StaticResource DisplayButton}" />
             <Button x:Name="editContact" Click="editContact_Click" Content="Edit Contact"/>
             <Button x:Name="deleteContact" Click="deleteContact_Click" Content="Delete Contact" Style="{StaticResource ResourceKey=DeleteButton}"/>
 
         </StackPanel>
+        
+
         <ListView Margin="10" x:Name="contactList">
             <ListView.ItemTemplate>
                 <DataTemplate>
