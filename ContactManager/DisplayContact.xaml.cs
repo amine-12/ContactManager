@@ -28,5 +28,10 @@ namespace ContactManager
             address.Text = MainWindow.contact[index].Address;
             email.Text = MainWindow.contact[index].Email;
         }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

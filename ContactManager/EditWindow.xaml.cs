@@ -29,5 +29,12 @@ namespace ContactManager
             emailEdit.Text = MainWindow.contact[index].Email;
 
         }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            //this.DataContext...
+            
+            Close();
+        }
     }
 }
