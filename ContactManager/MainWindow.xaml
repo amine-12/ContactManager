@@ -23,35 +23,36 @@
             <Setter Property="Background" Value="#ff7e75"/>
             <Setter Property="Height" Value="30"/>
         </Style>
-        
+
         <Style TargetType="Button" x:Key="AddButton" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Background" Value="#b6fcd3"/>
         </Style>
 
-        <Style TargetType="Button" x:Key="DisplayButton" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Background" Value="#70ccfa"/>
+        <Style TargetType="Button" x:Key="EditButton" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="LightYellow"/>
         </Style>
+        
     </Window.Resources>
 
     <DockPanel Margin="10">
         <StackPanel DockPanel.Dock="Top">
-            <Label Content="Contact Manager"/>
+            <Label Content="Contact Manager" Foreground="#4d4d4d" Margin="6,0,0,0"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Right" Margin="10,0" VerticalAlignment="Center">
 
             <Button x:Name="addContact" Click="addContact_Click" Content="Add Contact" Style="{StaticResource AddButton}"/>
-            <Button x:Name="editContact" Click="editContact_Click" Content="Edit Contact"/>
+            <Button x:Name="editContact" Click="editContact_Click" Content="Edit Contact" Style="{StaticResource EditButton}"/>
             <Button x:Name="deleteContact" Click="deleteContact_Click" Content="Delete Contact" Style="{StaticResource ResourceKey=DeleteButton}"/>
 
         </StackPanel>
-        
 
-        <ListView Margin="10" x:Name="contactList">
+
+        <ListView Margin="10" x:Name="contactList" Background="#f2f2f2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding LastName}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold" Foreground="#4d4d4d"/>
+                        <TextBlock Text="{Binding LastName}" FontWeight="Bold" Foreground="#4d4d4d"/>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
