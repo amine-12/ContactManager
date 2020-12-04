@@ -24,11 +24,8 @@ namespace ContactManager
         public MainWindow()
         {
             InitializeComponent();
-            
-            contact.Add(new Contact() { FirstName = "Bob", LastName = "Leponge ", PhoneNumber = "123 456 789", Email = "asads@gmail.com", Address = "123 Street" });
-            contact.Add(new Contact() { FirstName = "Qwer", LastName = "Ty", PhoneNumber = "545 456 789", Email = "adaeds@gmail.com", Address = "12334 Street" });
-            contact.Add(new Contact() { FirstName = "Tpop", LastName = "Hjkg", PhoneNumber = "123 516 789", Email = "gdsa@gmail.com", Address = "14223 Street" });
-            contact.Add(new Contact() { FirstName = "Lojk", LastName = "Poip", PhoneNumber = "123 456 945", Email = "ertf@gmail.com", Address = "1473 Street" });
+            var db = ContactDB.Instance;
+            contact = db.ReadContact();
             contactList.ItemsSource = contact;
             contactList.MouseDoubleClick +=  HandleDoubleClick;
         }
@@ -51,7 +48,6 @@ namespace ContactManager
             }
             
         }
-        
         
         private void deleteContact_Click(object sender, RoutedEventArgs e)
         {
