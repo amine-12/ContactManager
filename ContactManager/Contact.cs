@@ -4,6 +4,7 @@ namespace ContactManager
 {
     public class Contact
     {
+        public int ID { get; set; }
         private string firstName;
 
         public string FirstName

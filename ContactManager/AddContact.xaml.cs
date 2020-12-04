@@ -25,11 +25,15 @@ namespace ContactManager
         }
         private void Add_click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
+            Contact contactAdd = new Contact();
+            contactAdd.FirstName = firstNameAdd.Text;
+            contactAdd.LastName = lastNameAdd.Text;
+            contactAdd.PhoneNumber = phoneAdd.Text;
+            contactAdd.Address = addressAdd.Text;
+            contactAdd.Email = emailAdd.Text;
             var db = ContactDB.Instance;
-            db.AddContact(firstNameAdd.Text, lastNameAdd.Text, phoneAdd.Text, addressAdd.Text, emailAdd.Text);
-            MainWindow.contact = db.ReadContact();
-            main.contactList.ItemsSource = MainWindow.contact;
+            int idNew = db.AddContact(contactAdd);
+            MainWindow.contact.Add(contactAdd);
             Close();
         }
     }

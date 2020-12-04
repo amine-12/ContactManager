@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data.SqlClient;
 
@@ -17,9 +18,9 @@ namespace ContactManager
         {
             get { return instance; }
         }
-        public List<Contact> ReadContact()
+        public ObservableCollection<Contact> ReadContact()
         {
-            List<Contact> contactList = new List<Contact>();
+            ObservableCollection<Contact> contactList = new ObservableCollection<Contact>();
 
             using (SqlConnection con = new SqlConnection(ConString))
             {
@@ -44,35 +45,69 @@ namespace ContactManager
             return contactList;
         }
 
-        public void AddContact(string firstName, string lastName, string phone, string address, string email)
+        public int AddContact(Contact contact)
         {
-            SqlConnection con = new SqlConnection(ConString);
-
-            SqlCommand cm = new SqlCommand("INSERT INTO Contact (FirstName,LastName,PhoneNumber,Address,Email) VALUES(@firstName, @lastName, @phone, @address, @email)", con);
-
-            cm.Parameters.AddWithValue("@firstName", firstName);
-            cm.Parameters.AddWithValue("@lastName", lastName);
-            cm.Parameters.AddWithValue("@phone", phone);
-            cm.Parameters.AddWithValue("@address", address);
-            cm.Parameters.AddWithValue("@email", email);
-
-            try
+            int newID = 0;
+            int row = 1;
+            using (SqlConnection con = new SqlConnection(ConString))
             {
                 con.Open();
-                cm.ExecuteNonQuery();
-                Console.WriteLine($"Records Inserted Successfully");
+                string query = "INSERT INTO Contact (FirstName,LastName,PhoneNumber,Address,Email) VALUES(@firstName, @lastName, @phone, @address, @email)";
+
+                SqlCommand cm = new SqlCommand(query, con);
+
+                cm.Parameters.AddWithValue("@firstName", contact.FirstName);
+                cm.Parameters.AddWithValue("@lastName", contact.LastName);
+                cm.Parameters.AddWithValue("@phone", contact.PhoneNumber);
+                cm.Parameters.AddWithValue("@address", contact.Address);
+                cm.Parameters.AddWithValue("@email", contact.Email);
+
+                try
+                {
+                    row = cm.ExecuteNonQuery();
+                    string query2 = "select @@Identity as NewId from Contact";
+                    cm.CommandText = query2;
+                    cm.Connection = con;
+                    newID = Convert.ToInt32(cm.ExecuteScalar());
+                    Console.WriteLine($"Records Inserted Successfully");
+
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Error Generated. Details: " + e);
+                }
+                finally
+                {
+                    con.Close();
+                }
 
             }
-            catch (SqlException e)
-            {
-                Console.WriteLine("Error Generated. Details: " + e);
-            }
-            finally
-            {
-                con.Close();
-            }
+            return newID;
 
         }
+
+        public void DeleteContact(List<Contact> contacts,int id)
+        {
+
+            using (SqlConnection con = new SqlConnection(ConString))
+            {
+                con.Open();
+                SqlCommand cm = new SqlCommand("DELETE from Contact WHERE ID=@id", con);
+                using (SqlDataReader reader = cm.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Contact contact = new Contact();
+                        if (Int32.TryParse(reader["SKU"].ToString(), out int ID))
+                            contact.ID = ID;
+
+                    }
+                }
+                cm.Parameters.AddWithValue("@id", id);
+                contacts.RemoveAt(id);
+            }
+        }
+
 
     }
 }
