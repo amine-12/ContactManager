@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ContactManager"
         mc:Ignorable="d"
-    Title="Contact" Height="350" Width="450"
-        Background="#f2f2f2">
-
-        <Grid Margin="10">
+    Title="Contact" Height="350" Width="450">
+    <Border BorderBrush="#e6e6e6" BorderThickness="3">
+        <Grid Margin="10" Background="#baf6ff">
             <Label Content="First Name" HorizontalAlignment="Left" Margin="95,10,0,0" VerticalAlignment="Top"/>
             <Label Content="Last Name" HorizontalAlignment="Left" Margin="255,10,0,0" VerticalAlignment="Top"/>
             <Label Content="Address" HorizontalAlignment="Left" Margin="65,130,0,0" VerticalAlignment="Top"/>
@@ -19,7 +18,8 @@
             <TextBox IsReadOnly="True" x:Name="phone" HorizontalAlignment="Left" Height="25" Margin="68,105,0,0" VerticalAlignment="Top" Width="285"/>
             <TextBox IsReadOnly="True" x:Name="address" HorizontalAlignment="Left" Height="25" Margin="68,155,0,0"  VerticalAlignment="Top" Width="285"/>
             <TextBox IsReadOnly="True" x:Name="email" HorizontalAlignment="Left" Height="25" Margin="68,210,0,0"  VerticalAlignment="Top" Width="285"/>
-            <Button Content="Okay" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="175,255,0,0" Click="Close_Click" Background="#b6fcd3"/>
+            <Button Content="Okay" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="175,255,0,0" Click="Close_Click" Background="#80ff80"/>
+
         </Grid>
 
 </Window>
