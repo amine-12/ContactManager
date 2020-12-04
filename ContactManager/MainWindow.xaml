@@ -43,7 +43,7 @@
             <Button x:Name="addContact" Click="addContact_Click" Content="Add Contact" Style="{StaticResource AddButton}"/>
             <Button x:Name="editContact" Click="editContact_Click" Content="Edit Contact" Style="{StaticResource EditButton}"/>
             <Button x:Name="deleteContact" Click="deleteContact_Click" Content="Delete Contact" Style="{StaticResource ResourceKey=DeleteButton}"/>
-
+            <Button x:Name="refresh" Click="refresh_Click" Content="Refresh" Height="35" Width="88"/>
         </StackPanel>
 
 

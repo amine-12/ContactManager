@@ -44,5 +44,35 @@ namespace ContactManager
             return contactList;
         }
 
+        public void AddContact(string firstName, string lastName, string phone, string address, string email)
+        {
+            SqlConnection con = new SqlConnection(ConString);
+
+            SqlCommand cm = new SqlCommand("INSERT INTO Contact (FirstName,LastName,PhoneNumber,Address,Email) VALUES(@firstName, @lastName, @phone, @address, @email)", con);
+
+            cm.Parameters.AddWithValue("@firstName", firstName);
+            cm.Parameters.AddWithValue("@lastName", lastName);
+            cm.Parameters.AddWithValue("@phone", phone);
+            cm.Parameters.AddWithValue("@address", address);
+            cm.Parameters.AddWithValue("@email", email);
+
+            try
+            {
+                con.Open();
+                cm.ExecuteNonQuery();
+                Console.WriteLine($"Records Inserted Successfully");
+
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Error Generated. Details: " + e);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
     }
 }

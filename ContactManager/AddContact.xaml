@@ -10,15 +10,15 @@
         <Grid Margin="10" Background="#b6fcd3">
             <Label Content="First Name" HorizontalAlignment="Left" Margin="95,10,0,0" VerticalAlignment="Top"/>
             <Label Content="Last Name" HorizontalAlignment="Left" Margin="255,10,0,0" VerticalAlignment="Top"/>
-            <Label Content="Address" HorizontalAlignment="Left" Margin="65,130,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.149,0.559"/>
+            <Label Content="Address" HorizontalAlignment="Left" Margin="65,130,0,0" VerticalAlignment="Top"/>
             <Label Content="Phone Number" HorizontalAlignment="Left" Margin="65,80,0,0" VerticalAlignment="Top"/>
-            <Label Content="Email" HorizontalAlignment="Left" Margin="65,185,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.531,0.661"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="68,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="230,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="68,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="68,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="68,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
-            <Button Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="175,255,0,0" Background="#80ff80"/>
+            <Label Content="Email" HorizontalAlignment="Left" Margin="65,185,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="firstNameAdd" HorizontalAlignment="Left" Height="23" Margin="68,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="lastNameAdd" HorizontalAlignment="Left" Height="23" Margin="230,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="phoneAdd" HorizontalAlignment="Left" Height="23" Margin="68,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
+            <TextBox x:Name="addressAdd" HorizontalAlignment="Left" Height="23" Margin="68,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
+            <TextBox x:Name="emailAdd" HorizontalAlignment="Left" Height="23" Margin="68,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
+            <Button Content="Add" Click="Add_click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="175,255,0,0" Background="#80ff80"/>
 
         </Grid>
     </Border>

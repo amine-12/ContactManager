@@ -23,5 +23,14 @@ namespace ContactManager
         {
             InitializeComponent();
         }
+        private void Add_click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            var db = ContactDB.Instance;
+            db.AddContact(firstNameAdd.Text, lastNameAdd.Text, phoneAdd.Text, addressAdd.Text, emailAdd.Text);
+            MainWindow.contact = db.ReadContact();
+            main.contactList.ItemsSource = MainWindow.contact;
+            Close();
+        }
     }
 }
