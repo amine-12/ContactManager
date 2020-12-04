@@ -20,4 +20,5 @@
             <TextBox x:Name="emailEdit" HorizontalAlignment="Left" Height="23" Margin="68,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
             <Button Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="175,255,0,0" Click="Save_Click" Background="#80ff80"/>
         </Grid>
+    </Border>
 </Window>
