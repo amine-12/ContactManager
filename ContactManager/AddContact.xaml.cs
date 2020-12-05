@@ -23,5 +23,18 @@ namespace ContactManager
         {
             InitializeComponent();
         }
+        private void Add_click(object sender, RoutedEventArgs e)
+        {
+            Contact contactAdd = new Contact();
+            contactAdd.FirstName = firstNameAdd.Text;
+            contactAdd.LastName = lastNameAdd.Text;
+            contactAdd.PhoneNumber = phoneAdd.Text;
+            contactAdd.Address = addressAdd.Text;
+            contactAdd.Email = emailAdd.Text;
+            var db = ContactDB.Instance;
+            db.AddContact(contactAdd);
+            MainWindow.contact.Add(contactAdd);
+            Close();
+        }
     }
 }

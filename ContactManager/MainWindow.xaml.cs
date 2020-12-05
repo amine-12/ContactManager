@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,20 +21,18 @@ namespace ContactManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static List<Contact> contact = new List<Contact>();
+        ContactDB db = ContactDB.Instance;
+        public static ObservableCollection<Contact> contact = new ObservableCollection<Contact>();
         public MainWindow()
         {
             InitializeComponent();
-            
-            contact.Add(new Contact() { FirstName = "Bob", LastName = "Leponge ", PhoneNumber = "123 456 789", Email = "asads@gmail.com", Address = "123 Street" });
-            contact.Add(new Contact() { FirstName = "Qwer", LastName = "Ty", PhoneNumber = "545 456 789", Email = "adaeds@gmail.com", Address = "12334 Street" });
-            contact.Add(new Contact() { FirstName = "Tpop", LastName = "Hjkg", PhoneNumber = "123 516 789", Email = "gdsa@gmail.com", Address = "14223 Street" });
-            contact.Add(new Contact() { FirstName = "Lojk", LastName = "Poip", PhoneNumber = "123 456 945", Email = "ertf@gmail.com", Address = "1473 Street" });
+            contact = db.ReadContact();
             contactList.ItemsSource = contact;
-            contactList.MouseDoubleClick +=  HandleDoubleClick;
+            contactList.MouseDoubleClick +=  Display_Dbclick;
         }
 
-        private void HandleDoubleClick(object sender, RoutedEventArgs e)
+
+        private void Display_Dbclick(object sender, RoutedEventArgs e)
         {
             if (contactList.SelectedIndex >= 0)
             {
@@ -52,21 +51,18 @@ namespace ContactManager
             
         }
         
-        
         private void deleteContact_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (contactList.SelectedIndex >= 0)
+            int index = contactList.SelectedIndex;
+            if (index >= 0)
             {
-                contact.RemoveAt(contactList.SelectedIndex);
+                db.DeleteContact(contact[index].ID);
+                contact.RemoveAt(index);
                 foreach (var removedItem in contactList.SelectedItems)
-                {
-                    (contactList.ItemsSource as List<Contact>).Remove((Contact)removedItem);
-                }
+                    (contactList.ItemsSource as ObservableCollection<Contact>).Remove((Contact)removedItem);
             }
 
             contactList.Items.Refresh();
-          
             //foreach (var x in contact)
             //{
             //    Console.WriteLine(x.ToString());
