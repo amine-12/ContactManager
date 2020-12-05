@@ -13,6 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LumenWorks.Framework.IO.Csv;
+using System.Data;
+using System.IO;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace ContactManager
 {
@@ -28,7 +33,7 @@ namespace ContactManager
             InitializeComponent();
             contact = db.ReadContact();
             contactList.ItemsSource = contact;
-            contactList.MouseDoubleClick +=  Display_Dbclick;
+            contactList.MouseDoubleClick +=  Display_Dbclick; 
         }
 
 
@@ -76,5 +81,99 @@ namespace ContactManager
             addWindow.Show();
         }
 
+        private void importContact_Click(object sender, RoutedEventArgs e)
+        {
+            var csvData = new DataTable();
+
+            using (var csvReader = new CsvReader(new StreamReader(System.IO.File.OpenRead(@"C:\Users\clomb\Documents\importCsv.csv")), true))
+            {
+                csvData.Load(csvReader);
+            }
+
+            List<Contact> importedContacts = new List<Contact>();
+
+            for (int i = 0; i < csvData.Rows.Count; i++)
+            {
+                importedContacts.Add(new Contact
+                {
+                    FirstName = csvData.Rows[i][0].ToString(),
+                    LastName = csvData.Rows[i][1].ToString(),
+                    PhoneNumber = csvData.Rows[i][2].ToString(),
+                    Address = csvData.Rows[i][3].ToString(),
+                    Email = csvData.Rows[i][4].ToString(),
+                });
+            }
+
+            var db = ContactDB.Instance;
+
+            foreach (Contact contact in importedContacts)
+            {
+                db.AddContact(contact);
+                MainWindow.contact.Add(contact);
+            }
+
+
+        }
+
+        private void exportContact_Click(object sender, RoutedEventArgs e)
+        {
+            string destinationFolder = @"C:\Users\clomb\Desktop\export.csv";
+
+            string ConString = ConfigurationManager.ConnectionStrings["ContactConn"].ConnectionString;
+
+            using(SqlConnection con = new SqlConnection(ConString))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand("SELECT * From Contact", con);
+
+                DataTable dt = new DataTable();
+                dt.Load(command.ExecuteReader());
+
+                StreamWriter sw = new StreamWriter(destinationFolder, false);
+
+
+                int countColumns = dt.Columns.Count;
+
+                for(int c = 0; c < countColumns; c++)
+                {
+                    sw.Write(dt.Columns[c]);
+                    if(c < countColumns - 1)
+                    {
+                        sw.Write(",");
+                    }
+
+                }
+
+                sw.WriteLine();
+
+                foreach(DataRow dr in dt.Rows)
+                {
+                    for(int r = 0; r < countColumns; r++)
+                    {
+                        if (!Convert.IsDBNull(dr[r]))
+                        {
+                            sw.Write(dr[r].ToString());
+                        }
+                        if(r < countColumns - 1)
+                        {
+                            sw.Write(",");
+                        }
+
+                    }
+
+                    sw.WriteLine();
+                }
+
+                sw.Close();
+
+                MessageBox.Show("Operation Completed. Please verify destination folder for the export file.", "Completed",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+
+        }
+
+        
     }
 }
