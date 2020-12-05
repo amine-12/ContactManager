@@ -32,7 +32,7 @@ namespace ContactManager
             contactAdd.Address = addressAdd.Text;
             contactAdd.Email = emailAdd.Text;
             var db = ContactDB.Instance;
-            int idNew = db.AddContact(contactAdd);
+            db.AddContact(contactAdd);
             MainWindow.contact.Add(contactAdd);
             Close();
         }
