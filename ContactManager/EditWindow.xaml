@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ContactManager"
         mc:Ignorable="d"
-     Title="Edit Contact" Height="350" Width="450">
+     Title="Edit Contact" Height="350" Width="450"
+     Background="LightYellow">
     <Border BorderBrush="#e6e6e6" BorderThickness="3">
         <Grid Margin="10" Background="LightYellow" >
             <Label Content="First Name" HorizontalAlignment="Left" Margin="95,10,0,0" VerticalAlignment="Top"/>
@@ -20,4 +21,5 @@
             <TextBox x:Name="emailEdit" HorizontalAlignment="Left" Height="23" Margin="68,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
             <Button Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="175,255,0,0" Click="Save_Click" Background="#80ff80"/>
         </Grid>
+    </Border>
 </Window>
