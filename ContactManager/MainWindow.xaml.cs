@@ -92,11 +92,6 @@ namespace ContactManager
             {
                 filePath = openFileDialog.FileName;
             }
-            else
-            {
-                MessageBox.Show("No file selected.", "Process incomplete", MessageBoxButton.OK,
-                    MessageBoxImage.Information);
-            }
 
             try //I added the LumenWorks CsvReader 4.0 to my visual studio to do this part. (add the NuGet if it doesn't work)
             {
