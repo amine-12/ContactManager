@@ -20,7 +20,6 @@
             <TextBox IsReadOnly="True" x:Name="address" HorizontalAlignment="Left" Height="25" Margin="68,155,0,0"  VerticalAlignment="Top" Width="285"/>
             <TextBox IsReadOnly="True" x:Name="email" HorizontalAlignment="Left" Height="25" Margin="68,210,0,0"  VerticalAlignment="Top" Width="285"/>
             <Button Content="Okay" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="175,255,0,0" Click="Close_Click" Background="#80ff80"/>
-
         </Grid>
     </Border>
 </Window>

@@ -132,7 +132,6 @@ namespace ContactManager
                 MainWindow.contact.Add(contact);
             }
 
-
         }
 
         private void exportContact_Click(object sender, RoutedEventArgs e)
@@ -210,9 +209,7 @@ namespace ContactManager
 
                 MessageBox.Show("If the export file was saved, it will be found in the destination folder.", "SaveFile",
                     MessageBoxButton.OK, MessageBoxImage.Information);
-
             }
-
         }
 
         

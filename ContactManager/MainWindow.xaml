@@ -55,8 +55,8 @@
             <Button x:Name="addContact" Click="addContact_Click" Content="Add Contact" Style="{StaticResource AddButton}"/>
             <Button x:Name="editContact" Click="editContact_Click" Content="Edit Contact" Style="{StaticResource EditButton}"/>
             <Button x:Name="deleteContact" Click="deleteContact_Click" Content="Delete Contact" Style="{StaticResource ResourceKey=DeleteButton}"/>
-            <Button x:Name="importContact" Click="importContact_Click" Content="Import Contacts" Style="{StaticResource ImportButton}"/>
-            <Button x:Name="exportContact" Click="exportContact_Click" Content="Export Contacts" Style="{StaticResource ExportButton}"/>
+            <Button x:Name="importContact" Click="importContact_Click" Content="Import Contacts" Style="{StaticResource ImportButton}" Height="34"/>
+            <Button x:Name="exportContact" Click="exportContact_Click" Content="Export Contacts" Style="{StaticResource ExportButton}" Height="34"/>
         </StackPanel>
 
 
