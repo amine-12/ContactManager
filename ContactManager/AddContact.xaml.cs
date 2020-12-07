@@ -36,5 +36,6 @@ namespace ContactManager
             MainWindow.contact.Add(contactAdd);
             Close();
         }
+
     }
 }

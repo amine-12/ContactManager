@@ -85,7 +85,7 @@ namespace ContactManager
         {
             var csvData = new DataTable();
 
-            using (var csvReader = new CsvReader(new StreamReader(System.IO.File.OpenRead(@"C:\Users\clomb\Documents\importCsv.csv")), true))
+            using (var csvReader = new CsvReader(new StreamReader(System.IO.File.OpenRead(@"C:\Users\mazig\OneDrive\Bureau\export.csv")), true))
             {
                 csvData.Load(csvReader);
             }
@@ -112,12 +112,11 @@ namespace ContactManager
                 MainWindow.contact.Add(contact);
             }
 
-
         }
 
         private void exportContact_Click(object sender, RoutedEventArgs e)
         {
-            string destinationFolder = @"C:\Users\clomb\Desktop\export.csv";
+            string destinationFolder = @"C:\Users\mazig\OneDrive\Bureau\export.csv";
 
             string ConString = ConfigurationManager.ConnectionStrings["ContactConn"].ConnectionString;
 
@@ -169,9 +168,7 @@ namespace ContactManager
 
                 MessageBox.Show("Operation Completed. Please verify destination folder for the export file.", "Completed",
                     MessageBoxButton.OK, MessageBoxImage.Information);
-
             }
-
         }
 
         
