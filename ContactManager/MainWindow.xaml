@@ -40,6 +40,10 @@
             <Setter Property="Background" Value="#42a4f5"/>
         </Style>
 
+        <Style TargetType="Border" x:Key="BorderColors">
+            
+        </Style>
+
     </Window.Resources>
 
     <DockPanel Margin="10">
@@ -56,12 +60,34 @@
         </StackPanel>
 
 
-        <ListView Margin="10" x:Name="contactList" Background="#f2f2f2">
+        <ListView Margin="10" x:Name="contactList" Background="#f2f2f2" BorderThickness="2" BorderBrush="#42a4f5">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold" Foreground="#4d4d4d"/>
-                        <TextBlock Text="{Binding LastName}" FontWeight="Bold" Foreground="#4d4d4d"/>
+                        <TextBlock>
+                            <Run Text="{Binding FirstName}" FontWeight="Bold" Foreground="#4d4d4d"/>
+                            <Run Text="{Binding LastName}" FontWeight="Bold" Foreground="#4d4d4d"/>
+                            <TextBlock.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="FontSize"
+                                                To="15" Duration="0:0:0.15"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="FontSize"
+                                                To="12" Duration="0:0:0.15"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </TextBlock.Triggers>
+                        </TextBlock>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
