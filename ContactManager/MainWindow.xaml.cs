@@ -18,6 +18,7 @@ using System.Data;
 using System.IO;
 using System.Configuration;
 using System.Data.SqlClient;
+using Microsoft.Win32;
 
 namespace ContactManager
 {
@@ -85,9 +86,33 @@ namespace ContactManager
         {
             var csvData = new DataTable();
 
-            using (var csvReader = new CsvReader(new StreamReader(System.IO.File.OpenRead(@"C:\Users\clomb\Documents\importCsv.csv")), true))
+            var filePath = string.Empty;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.InitialDirectory = "C:\\Users\\clomb\\Documents";
+            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*|CSV files (*.csv)|*.csv";
+
+            if(openFileDialog.ShowDialog() == true)
             {
-                csvData.Load(csvReader);
+                filePath = openFileDialog.FileName;
+            }
+            else
+            {
+                MessageBox.Show("No file selected.", "Process incomplete", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
+
+            try //I added the LumenWorks CsvReader 4.0 to my visual studio to do this part. (add the NuGet if it doesn't work)
+            {
+                using (var csvReader = new CsvReader(new StreamReader(System.IO.File.OpenRead(filePath)), true))
+                {
+                    csvData.Load(csvReader);
+                }
+            }
+            catch(ArgumentException)
+            {
+                Close();
             }
 
             List<Contact> importedContacts = new List<Contact>();
@@ -117,7 +142,22 @@ namespace ContactManager
 
         private void exportContact_Click(object sender, RoutedEventArgs e)
         {
-            string destinationFolder = @"C:\Users\clomb\Desktop\export.csv";
+            var filePath = string.Empty;
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.InitialDirectory = "C:\\Users\\clomb\\Desktop";
+            saveFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*|CSV files (*.csv)|*.csv";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                filePath = saveFileDialog.FileName;
+            }
+            else
+            {
+                MessageBox.Show("No file selected.", "Process incomplete", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
 
             string ConString = ConfigurationManager.ConnectionStrings["ContactConn"].ConnectionString;
 
@@ -130,32 +170,16 @@ namespace ContactManager
                 DataTable dt = new DataTable();
                 dt.Load(command.ExecuteReader());
 
-                StreamWriter sw = new StreamWriter(destinationFolder, false);
-
-
-                int countColumns = dt.Columns.Count;
-
-                for(int c = 0; c < countColumns; c++)
+                try
                 {
-                    sw.Write(dt.Columns[c]);
-                    if(c < countColumns - 1)
+                    StreamWriter sw = new StreamWriter(filePath, false);
+
+                    int countColumns = dt.Columns.Count;
+
+                    for (int c = 0; c < countColumns; c++)
                     {
-                        sw.Write(",");
-                    }
-
-                }
-
-                sw.WriteLine();
-
-                foreach(DataRow dr in dt.Rows)
-                {
-                    for(int r = 0; r < countColumns; r++)
-                    {
-                        if (!Convert.IsDBNull(dr[r]))
-                        {
-                            sw.Write(dr[r].ToString());
-                        }
-                        if(r < countColumns - 1)
+                        sw.Write(dt.Columns[c]);
+                        if (c < countColumns - 1)
                         {
                             sw.Write(",");
                         }
@@ -163,11 +187,33 @@ namespace ContactManager
                     }
 
                     sw.WriteLine();
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        for (int r = 0; r < countColumns; r++)
+                        {
+                            if (!Convert.IsDBNull(dr[r]))
+                            {
+                                sw.Write(dr[r].ToString());
+                            }
+                            if (r < countColumns - 1)
+                            {
+                                sw.Write(",");
+                            }
+
+                        }
+
+                        sw.WriteLine();
+                    }
+
+                    sw.Close();
+                }
+                catch (ArgumentException)
+                {
+                    Close();
                 }
 
-                sw.Close();
-
-                MessageBox.Show("Operation Completed. Please verify destination folder for the export file.", "Completed",
+                MessageBox.Show("If the export file was saved, it will be found in the destination folder.", "SaveFile",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
