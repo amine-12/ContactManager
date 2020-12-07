@@ -67,13 +67,7 @@ namespace ContactManager
                 foreach (var removedItem in contactList.SelectedItems)
                     (contactList.ItemsSource as ObservableCollection<Contact>).Remove((Contact)removedItem);
             }
-
             contactList.Items.Refresh();
-            //foreach (var x in contact)
-            //{
-            //    Console.WriteLine(x.ToString());
-            //    Console.WriteLine("----------------------");
-            //}
         }
 
         private void addContact_Click(object sender, RoutedEventArgs e)
@@ -88,12 +82,13 @@ namespace ContactManager
 
             var filePath = string.Empty;
 
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                InitialDirectory = "C:\\Users\\clomb\\Documents",
+                Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*|CSV files (*.csv)|*.csv"
+            };
 
-            openFileDialog.InitialDirectory = "C:\\Users\\clomb\\Documents";
-            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*|CSV files (*.csv)|*.csv";
-
-            if(openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true)
             {
                 filePath = openFileDialog.FileName;
             }
@@ -129,8 +124,6 @@ namespace ContactManager
                 });
             }
 
-            var db = ContactDB.Instance;
-
             foreach (Contact contact in importedContacts)
             {
                 db.AddContact(contact);
@@ -143,20 +136,17 @@ namespace ContactManager
         {
             var filePath = string.Empty;
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-
-            saveFileDialog.InitialDirectory = "C:\\Users\\clomb\\Desktop";
-            saveFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*|CSV files (*.csv)|*.csv";
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                InitialDirectory = "C:\\Users\\clomb\\Desktop",
+                Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*|CSV files (*.csv)|*.csv"
+            };
 
             if (saveFileDialog.ShowDialog() == true)
             {
                 filePath = saveFileDialog.FileName;
             }
-            else
-            {
-                MessageBox.Show("No file selected.", "Process incomplete", MessageBoxButton.OK,
-                    MessageBoxImage.Information);
-            }
+         
 
             string ConString = ConfigurationManager.ConnectionStrings["ContactConn"].ConnectionString;
 
