@@ -76,6 +76,7 @@ namespace ContactManager
             addWindow.Show();
         }
 
+        //import
         private void importContact_Click(object sender, RoutedEventArgs e)
         {
             var csvData = new DataTable();
@@ -126,7 +127,7 @@ namespace ContactManager
             }
 
         }
-
+        //export
         private void exportContact_Click(object sender, RoutedEventArgs e)
         {
             var filePath = string.Empty;
