@@ -19,7 +19,8 @@ using System.IO;
 using System.Configuration;
 using System.Data.SqlClient;
 using Microsoft.Win32;
-
+using System.Collections.Specialized;
+using System.ComponentModel;
 namespace ContactManager
 {
     /// <summary>
@@ -28,18 +29,18 @@ namespace ContactManager
     public partial class MainWindow : Window
     {
         ContactDB db = ContactDB.Instance;
+
         public static ObservableCollection<Contact> contact = new ObservableCollection<Contact>();
         public MainWindow()
         {
             InitializeComponent();
             contact = db.ReadContact();
             contactList.ItemsSource = contact;
-            contactList.MouseDoubleClick +=  Display_Dbclick; 
+            contactList.MouseDoubleClick +=  Display_Dbclick;
         }
 
-
         private void Display_Dbclick(object sender, RoutedEventArgs e)
-        {
+        { 
             if (contactList.SelectedIndex >= 0)
             {
                 DisplayContact displayContact = new DisplayContact(contactList.SelectedIndex);
@@ -54,6 +55,7 @@ namespace ContactManager
                 EditWindow editWindow = new EditWindow(contactList.SelectedIndex);
                 editWindow.Show();
             }
+
             
         }
         
@@ -64,10 +66,7 @@ namespace ContactManager
             {
                 db.DeleteContact(contact[index].ID);
                 contact.RemoveAt(index);
-                foreach (var removedItem in contactList.SelectedItems)
-                    (contactList.ItemsSource as ObservableCollection<Contact>).Remove((Contact)removedItem);
             }
-            contactList.Items.Refresh();
         }
 
         private void addContact_Click(object sender, RoutedEventArgs e)
@@ -201,7 +200,5 @@ namespace ContactManager
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
-        
     }
 }

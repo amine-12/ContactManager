@@ -19,12 +19,9 @@ namespace ContactManager
     /// </summary>
     public partial class DisplayContact : Window
     {
-        public int INDEX { get; set; }
         public DisplayContact(int index)
         {
-            INDEX = index;
             InitializeComponent();
-            EditWindow editWindow = new EditWindow(INDEX);
             firstName.Text = MainWindow.contact[index].FirstName;
             lastName.Text = MainWindow.contact[index].LastName;
             phone.Text = MainWindow.contact[index].PhoneNumber;
@@ -36,16 +33,6 @@ namespace ContactManager
         {
             Close();
         }
-
-        private void editContact_Click(object sender, RoutedEventArgs e)
-        {
-            if (INDEX >= 0)
-            {
-                EditWindow editWindow = new EditWindow(INDEX);
-                editWindow.Show();
-            }
-        }
-
 
     }
 }

@@ -10,7 +10,7 @@ namespace ContactManager
         public string FirstName
         {
             get { return  firstName; }
-            set {  firstName = value + " "; }
+            set {  firstName = value; }
         }
 
         private string lastName;
@@ -18,7 +18,7 @@ namespace ContactManager
         public string LastName
         {
             get { return lastName; }
-            set { lastName = value + " "; }
+            set { lastName = value; }
         }
 
         private string phoneNumber;
@@ -26,7 +26,7 @@ namespace ContactManager
         public string PhoneNumber
         {
             get { return phoneNumber; }
-            set { phoneNumber = value + " "; }
+            set { phoneNumber = value; }
         }
 
         private string email;
@@ -34,7 +34,7 @@ namespace ContactManager
         public string Email
         {
             get { return email; }
-            set { email = value + " "; }
+            set { email = value; }
         }
 
         private string address;
@@ -42,7 +42,7 @@ namespace ContactManager
         public string Address
         {
             get { return address; }
-            set { address = value + " "; }
+            set { address = value; }
         }
 
         public override string ToString()

@@ -84,7 +84,6 @@ namespace ContactManager
 
             }
             return newID;
-
         }
 
         public int DeleteContact(int id)
@@ -102,7 +101,6 @@ namespace ContactManager
                 try
                 {
                     cm.Parameters.AddWithValue("@id", id);
-                    Console.WriteLine(id);
                     row = cm.ExecuteNonQuery();
                 }
                 catch (SqlException e)
