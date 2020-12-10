@@ -1,8 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace ContactManager
 {
-    public class Contact
+    public class Contact : ObservableObject
     {
         public int ID { get; set; }
         private string firstName;
@@ -10,7 +11,11 @@ namespace ContactManager
         public string FirstName
         {
             get { return  firstName; }
-            set {  firstName = value; }
+            set 
+            {  
+                firstName = value;
+                OnPropertyChanged("FirstName");
+            }
         }
 
         private string lastName;
@@ -18,7 +23,11 @@ namespace ContactManager
         public string LastName
         {
             get { return lastName; }
-            set { lastName = value; }
+            set
+            { 
+                lastName = value;
+                OnPropertyChanged("LastName");
+            }
         }
 
         private string phoneNumber;

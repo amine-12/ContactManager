@@ -29,12 +29,13 @@ namespace ContactManager
     public partial class MainWindow : Window
     {
         ContactDB db = ContactDB.Instance;
-
+        MainViewModel main = new MainViewModel();
         public static ObservableCollection<Contact> contact = new ObservableCollection<Contact>();
         public MainWindow()
         {
             InitializeComponent();
             contact = db.ReadContact();
+            DataContext = main;
             contactList.ItemsSource = contact;
             contactList.MouseDoubleClick +=  Display_Dbclick;
         }
@@ -55,8 +56,6 @@ namespace ContactManager
                 EditWindow editWindow = new EditWindow(contactList.SelectedIndex);
                 editWindow.Show();
             }
-
-            
         }
         
         private void deleteContact_Click(object sender, RoutedEventArgs e)
